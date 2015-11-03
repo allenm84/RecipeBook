@@ -35,6 +35,10 @@ namespace RecipeBook
         var txtName = new TextEdit();
         txtName.BindText(recipe, r => r.Name);
 
+        var txtDirections = new MemoEdit();
+        txtDirections.MinimumSize = new Size(0, 100);
+        txtDirections.BindText(recipe, r => r.Directions);
+
         var tbl = new TableLayoutPanel();
         tbl.ColumnCount = 3;
         tbl.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
@@ -63,6 +67,7 @@ namespace RecipeBook
         return FormBuilder.CreateOKCancel("Edit Recipe", recipe,
           new FormBuilderItem(txtName, "Name:"),
           new FormBuilderItem(grid, "Items:"),
+          new FormBuilderItem(txtDirections, "Directions:"),
           new FormBuilderItem(tbl),
           new FormBuilderItem(ctrlAmount, "Makes:"));
       }
