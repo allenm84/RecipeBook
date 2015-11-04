@@ -19,7 +19,6 @@ namespace RecipeBook
       Name = recipe.Name;
       Amount = recipe.Amount.Value;
       Measurement = recipe.Amount.Measurement;
-      Directions = recipe.Directions;
 
       foreach (var item in recipe.Ingredients)
       {
@@ -50,12 +49,6 @@ namespace RecipeBook
     public Measurement Measurement
     {
       get { return GetField<Measurement>(); }
-      set { SetField(value); }
-    }
-
-    public string Directions
-    {
-      get { return GetField<string>(); }
       set { SetField(value); }
     }
 

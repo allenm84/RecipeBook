@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DevExpress.Data;
 using DevExpress.XtraLayout;
 
 namespace RecipeBook
@@ -39,18 +40,24 @@ namespace RecipeBook
         group1.Name = "LayoutControlGroup1";
         group1.Text = "Ingredients";
 
+        var gridIngredients = new EditableListGridControl<IngredientViewModel>(saveFile.Ingredients);
+        gridIngredients.GridView.Columns["Name"].SortOrder = ColumnSortOrder.Ascending;
+
         var item1 = group1.AddItem();
         item1.Name = "LayoutControlItem1";
-        item1.Control = new EditableListGridControl<IngredientViewModel>(saveFile.Ingredients);
+        item1.Control = gridIngredients;
         item1.TextVisible = false;
 
         var group2 = tabbedGroup.AddTabPage();
         group2.Name = "LayoutControlGroup2";
         group2.Text = "Recipes";
 
+        var gridRecipes = new EditableListGridControl<RecipeViewModel>(saveFile.Recipes);
+        gridRecipes.GridView.Columns["Name"].SortOrder = ColumnSortOrder.Ascending;
+
         var item2 = group2.AddItem();
         item2.Name = "LayoutControlItem2";
-        item2.Control = new EditableListGridControl<RecipeViewModel>(saveFile.Recipes);
+        item2.Control = gridRecipes;
         item2.TextVisible = false;
 
         tabbedGroup.SelectedTabPage = group1;

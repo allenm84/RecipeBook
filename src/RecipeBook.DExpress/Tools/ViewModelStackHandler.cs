@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.Data;
 using DevExpress.XtraEditors;
 
 namespace RecipeBook
@@ -35,10 +36,6 @@ namespace RecipeBook
         var txtName = new TextEdit();
         txtName.BindText(recipe, r => r.Name);
 
-        var txtDirections = new MemoEdit();
-        txtDirections.MinimumSize = new Size(0, 100);
-        txtDirections.BindText(recipe, r => r.Directions);
-
         var tbl = new TableLayoutPanel();
         tbl.ColumnCount = 3;
         tbl.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
@@ -67,7 +64,6 @@ namespace RecipeBook
         return FormBuilder.CreateOKCancel("Edit Recipe", recipe,
           new FormBuilderItem(txtName, "Name:"),
           new FormBuilderItem(grid, "Items:"),
-          new FormBuilderItem(txtDirections, "Directions:"),
           new FormBuilderItem(tbl),
           new FormBuilderItem(ctrlAmount, "Makes:"));
       }
@@ -76,13 +72,23 @@ namespace RecipeBook
         var ingredient = (IngredientReferenceEditorViewModel)viewModel;
 
         var cboIngredients = new SearchLookUpEdit();
-        cboIngredients.Properties.View.Columns.AddVisible("Display");
+        cboIngredients.Properties.View.Columns.AddVisible("Display").SortOrder = ColumnSortOrder.Ascending;
         cboIngredients.Properties.View.OptionsView.ShowColumnHeaders = false;
         cboIngredients.Properties.View.OptionsView.ShowIndicator = false;
         cboIngredients.Properties.DataSource = ingredient.Ingredients;
         cboIngredients.Properties.ValueMember = "ID";
         cboIngredients.Properties.DisplayMember = "Display";
-        cboIngredients.BindEditValue(ingredient, (i => i.IngredientID));
+        cboIngredients.Properties.ShowAddNewButton = true;
+        cboIngredients.AddNewValue += (o, e) =>
+        {
+          // execute the add ingredient command
+          ingredient.SearchText = cboIngredients.GetFilterText();
+          ingredient.AddIngredientCommand.Execute(this);
+          e.Cancel = true;
+        };
+
+        var binding = cboIngredients.BindEditValue(ingredient, (i => i.IngredientID));
+        binding.DataSourceNullValue = null;
 
         var ctrlAmount = new AmountControl();
         ctrlAmount.BindAmount(ingredient, r => r.Amount);

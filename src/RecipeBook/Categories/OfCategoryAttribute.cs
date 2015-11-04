@@ -18,5 +18,11 @@ namespace RecipeBook
     {
 
     }
+
+    public OfCategoryAttribute(string singular, string plural)
+      : base(singular, plural)
+    {
+
+    }
   }
 }

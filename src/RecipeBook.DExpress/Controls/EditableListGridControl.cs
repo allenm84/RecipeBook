@@ -36,6 +36,11 @@ namespace RecipeBook
       btnClear.Bind(listViewModel.ClearCommand);
     }
 
+    public GridView GridView
+    {
+      get { return gridViewItems; }
+    }
+
     private void gridViewItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
       for (int r = 0; r < gridViewItems.DataRowCount; ++r)

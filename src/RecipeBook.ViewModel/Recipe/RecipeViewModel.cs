@@ -11,23 +11,22 @@ namespace RecipeBook
     private readonly RecipeListViewModel mOwner;
 
     internal RecipeViewModel(RecipeListViewModel owner, Recipe recipe)
-      : this(owner, recipe.ID, recipe.Name, recipe.Amount, recipe.Directions, recipe.Ingredients)
+      : this(owner, recipe.ID, recipe.Name, recipe.Amount, recipe.Ingredients)
     {
     }
 
     internal RecipeViewModel(RecipeListViewModel owner, string id, string name)
-      : this(owner, id, name, new Amount(), "1.", Arrays<IngredientReference>.Empty)
+      : this(owner, id, name, new Amount(), Arrays<IngredientReference>.Empty)
     {
     }
 
-    internal RecipeViewModel(RecipeListViewModel owner, string id, string name, Amount amount, string directions, IEnumerable<IngredientReference> ingredients)
+    internal RecipeViewModel(RecipeListViewModel owner, string id, string name, Amount amount, IEnumerable<IngredientReference> ingredients)
     {
       mOwner = owner;
 
       ID = id;
       Name = name;
       Amount = amount;
-      Directions = directions;
       Ingredients = ingredients.Select(i => new IngredientReferenceViewModel(owner.IngredientList, i)).ToArray();
       
       Commit();
@@ -48,12 +47,6 @@ namespace RecipeBook
         SetField(value);
         AmountDisplay = string.Format("Makes {0}", value.GetDisplay());
       }
-    }
-
-    internal string Directions
-    {
-      get { return GetField<string>(); }
-      set { SetField(value); }
     }
 
     public string AmountDisplay

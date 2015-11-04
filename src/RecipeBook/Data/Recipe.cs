@@ -14,7 +14,5 @@ namespace RecipeBook
     public Amount Amount { get; set; }
     [DataMember(Order = 1)]
     public IngredientReference[] Ingredients { get; set; }
-    [DataMember(Order = 2)]
-    public string Directions { get; set; }
   }
 }

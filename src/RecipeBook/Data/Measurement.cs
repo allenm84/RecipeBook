@@ -54,5 +54,7 @@ namespace RecipeBook
     Packet,
     [EnumMember, OfCategory("unit")]
     Unit,
+    [EnumMember, OfCategory("pinch", "pinches")]
+    Pinch,
   }
 }

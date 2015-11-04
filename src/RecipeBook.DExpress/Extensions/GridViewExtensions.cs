@@ -30,6 +30,7 @@ namespace RecipeBook
       gridViewItems.OptionsCustomization.AllowColumnResizing = false;
       gridViewItems.OptionsCustomization.AllowRowSizing = false;
       gridViewItems.OptionsDetail.EnableMasterViewMode = false;
+      gridViewItems.OptionsNavigation.AutoFocusNewRow = true;
       gridViewItems.OptionsSelection.EnableAppearanceFocusedCell = false;
       gridViewItems.OptionsSelection.EnableAppearanceFocusedRow = true;
       gridViewItems.OptionsSelection.EnableAppearanceHideSelection = true;
