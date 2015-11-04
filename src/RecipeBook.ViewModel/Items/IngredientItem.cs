@@ -20,9 +20,14 @@ namespace RecipeBook
       get { return mIngredient; }
     }
 
-    public override string ID
+    public string ID
     {
       get { return mIngredient.ID; }
+    }
+
+    public override object Value
+    {
+      get { return ID; }
     }
 
     public override string Display

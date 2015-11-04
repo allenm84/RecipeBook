@@ -8,13 +8,6 @@ namespace RecipeBook
 {
   public class VolumeCategoryAttribute : MeasurementCategoryAttribute
   {
-    public override string Name
-    {
-      get { return "Volume"; }
-    }
-
-    public double ToCups { get; private set; }
-
     public VolumeCategoryAttribute(double toCups, string display)
       : this(toCups, display, display + "s")
     {
@@ -25,6 +18,18 @@ namespace RecipeBook
       : base(singular, plural)
     {
       ToCups = toCups;
+    }
+
+    public override string Name
+    {
+      get { return "Volume"; }
+    }
+
+    public double ToCups { get; private set; }
+
+    public override decimal Factor
+    {
+      get { return (decimal)ToCups; }
     }
   }
 }

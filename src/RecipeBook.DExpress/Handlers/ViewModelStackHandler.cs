@@ -37,8 +37,9 @@ namespace RecipeBook
         txtName.BindText(recipe, r => r.Name);
 
         var tbl = new TableLayoutPanel();
-        tbl.ColumnCount = 3;
+        tbl.ColumnCount = 4;
         tbl.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
+        tbl.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
         tbl.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
         tbl.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
         tbl.RowCount = 1;
@@ -52,8 +53,15 @@ namespace RecipeBook
         btnModify.Size = new Size(96, 22);
         btnModify.Bind(recipe.ModifyRecipeCommand);
 
+        var btnReduce = new SimpleButton();
+        btnReduce.Margin = new Padding(3);
+        btnReduce.Text = "Reduce";
+        btnReduce.Size = new Size(96, 22);
+        btnReduce.Bind(recipe.ReduceRecipeCommand);
+
         tbl.SuspendLayout();
         tbl.Controls.Add(btnModify, 1, 0);
+        tbl.Controls.Add(btnReduce, 2, 0);
         tbl.ResumeLayout();
 
         var ctrlAmount = new AmountControl(false);
@@ -76,7 +84,7 @@ namespace RecipeBook
         cboIngredients.Properties.View.OptionsView.ShowColumnHeaders = false;
         cboIngredients.Properties.View.OptionsView.ShowIndicator = false;
         cboIngredients.Properties.DataSource = ingredient.Ingredients;
-        cboIngredients.Properties.ValueMember = "ID";
+        cboIngredients.Properties.ValueMember = "Value";
         cboIngredients.Properties.DisplayMember = "Display";
         cboIngredients.Properties.ShowAddNewButton = true;
         cboIngredients.AddNewValue += (o, e) =>
@@ -101,6 +109,10 @@ namespace RecipeBook
       else if (viewModel is ModifyRecipeViewModel)
       {
         return new ModifyRecipeDialog((ModifyRecipeViewModel)viewModel);
+      }
+      else if (viewModel is ReduceRecipeViewModel)
+      {
+        return new ReduceRecipeDialog((ReduceRecipeViewModel)viewModel);
       }
 
       return null;

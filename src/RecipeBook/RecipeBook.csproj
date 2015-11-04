@@ -55,6 +55,7 @@
     <Compile Include="Data\SaveFile.cs" />
     <Compile Include="Categories\VolumeCategoryAttribute.cs" />
     <Compile Include="Service\ISaveFileService.cs" />
+    <Compile Include="Tools\Fraction.cs" />
     <Compile Include="Tools\ID.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

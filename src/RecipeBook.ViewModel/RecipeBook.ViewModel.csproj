@@ -52,7 +52,9 @@
     <Compile Include="Base\BaseSelectableViewModel.cs" />
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Common\DelegateCommand.cs" />
+    <Compile Include="Items\AmountItem.cs" />
     <Compile Include="Items\IngredientItem.cs" />
+    <Compile Include="Items\MeasurementFractionItem.cs" />
     <Compile Include="Items\ValueDisplayItem.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="IngredientReference\IngredientReferenceEditorViewModel.cs" />
@@ -62,6 +64,8 @@
     <Compile Include="Ingredient\IngredientViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recipe\ModifyRecipeViewModel.cs" />
+    <Compile Include="Recipe\ReduceRecipeItemViewModel.cs" />
+    <Compile Include="Recipe\ReduceRecipeViewModel.cs" />
     <Compile Include="Recipe\RecipeEditorViewModel.cs" />
     <Compile Include="Recipe\RecipeListViewModel.cs" />
     <Compile Include="Recipe\RecipeViewModel.cs" />

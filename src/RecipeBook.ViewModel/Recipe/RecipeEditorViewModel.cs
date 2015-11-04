@@ -11,6 +11,7 @@ namespace RecipeBook
   {
     private readonly RecipeViewModel mRecipe;
     private readonly DelegateCommand mModifyRecipeCommand;
+    private readonly DelegateCommand mReduceRecipeCommand;
 
     internal RecipeEditorViewModel(RecipeViewModel recipe)
     {
@@ -26,12 +27,19 @@ namespace RecipeBook
       }
 
       mModifyRecipeCommand = new DelegateCommand(DoModifyRecipe);
+      mReduceRecipeCommand = new DelegateCommand(DoReduceRecipe, CanReduceRecipe);
+
       Commit();
     }
 
     public ICommand ModifyRecipeCommand
     {
       get { return mModifyRecipeCommand; }
+    }
+
+    public ICommand ReduceRecipeCommand
+    {
+      get { return mReduceRecipeCommand; }
     }
 
     public string Name
@@ -61,6 +69,35 @@ namespace RecipeBook
         var recipe = CreateModifiedRecipe(modify);
         var viewModel = new RecipeViewModel(mRecipe.Owner, recipe);
         mRecipe.Owner.Items.Add(viewModel);
+      }
+    }
+
+    private bool CanReduceRecipe()
+    {
+      return mItems.Count > 0;
+    }
+
+    private async void DoReduceRecipe()
+    {
+      var reduce = new ReduceRecipeViewModel(this);
+      ViewModelStack.Push(reduce);
+      if (await reduce.Completed)
+      {
+        foreach (var item in reduce.Items)
+        {
+          var ingredient = item.Ingredient;
+          var measurement = item.SelectedItem as MeasurementFractionItem;
+          if (measurement == null)
+          {
+            continue;
+          }
+
+          ingredient.Amount = new Amount
+          {
+            Measurement = measurement.Measurement,
+            Value = measurement.Amount,
+          };
+        }
       }
     }
 
@@ -98,6 +135,14 @@ namespace RecipeBook
       recipe.Ingredients = ingredients.ToArray();
       recipe.Name = modify.Name;
       return recipe;
+    }
+
+    protected override void InternalOnListChanged()
+    {
+      if (mReduceRecipeCommand != null)
+      {
+        mReduceRecipeCommand.Refresh();
+      }
     }
 
     protected override IngredientReferenceViewModel CreateNew()

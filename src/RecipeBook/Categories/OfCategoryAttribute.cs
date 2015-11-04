@@ -8,11 +8,6 @@ namespace RecipeBook
 {
   public class OfCategoryAttribute : MeasurementCategoryAttribute
   {
-    public override string Name
-    {
-      get { return "Other"; }
-    }
-
     public OfCategoryAttribute(string display)
       : base(display)
     {
@@ -23,6 +18,16 @@ namespace RecipeBook
       : base(singular, plural)
     {
 
+    }
+
+    public override string Name
+    {
+      get { return "Other"; }
+    }
+
+    public override decimal Factor
+    {
+      get { return 1m; }
     }
   }
 }

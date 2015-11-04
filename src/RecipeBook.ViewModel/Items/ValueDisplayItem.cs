@@ -8,7 +8,7 @@ namespace RecipeBook
 {
   public abstract class ValueDisplayItem
   {
-    public abstract string ID { get; }
+    public abstract object Value { get; }
     public abstract string Display { get; }
 
     public override string ToString()

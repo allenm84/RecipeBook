@@ -26,6 +26,8 @@ namespace RecipeBook
 
     public abstract string Name { get; }
 
+    public abstract decimal Factor { get; }
+
     public override string ToString()
     {
       return Name;

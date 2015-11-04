@@ -47,6 +47,27 @@ namespace RecipeBook
       set { SetField(value); }
     }
 
+    internal string Name
+    {
+      get
+      {
+        ValueDisplayItem item;
+        if (string.IsNullOrEmpty(IngredientID) || !mLookUp.TryGetValue(IngredientID, out item))
+        {
+          item = null;
+        }
+
+        if (item == null)
+        {
+          return "[Nothing]";
+        }
+        else
+        {
+          return item.Display;
+        }
+      }
+    }
+
     public string Display
     {
       get { return GetField<string>(); }

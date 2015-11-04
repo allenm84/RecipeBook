@@ -8,13 +8,6 @@ namespace RecipeBook
 {
   public class MassWeightCategoryAttribute : MeasurementCategoryAttribute
   {
-    public override string Name
-    {
-      get { return "Mass/Weight"; }
-    }
-
-    public double ToGrams { get; private set; }
-
     public MassWeightCategoryAttribute(double toGrams, string display)
       : this(toGrams, display, display + "s")
     {
@@ -25,6 +18,18 @@ namespace RecipeBook
       : base(singular, plural)
     {
       ToGrams = toGrams;
+    }
+
+    public override string Name
+    {
+      get { return "Mass/Weight"; }
+    }
+
+    public double ToGrams { get; private set; }
+
+    public override decimal Factor
+    {
+      get { return (decimal)ToGrams; }
     }
   }
 }
