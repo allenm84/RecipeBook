@@ -10,22 +10,11 @@ namespace RecipeBook
   public class ReduceRecipeItemViewModel : BaseViewModel
   {
     static readonly Dictionary<Measurement, MeasurementCategoryAttribute> sMeasurementAttributes;
-    static readonly HashSet<Measurement> sCommonMeasurements;
     static ReduceRecipeItemViewModel()
     {
       sMeasurementAttributes = Enums<Measurement>.Values.ToDictionary(
         k => k, 
         v => v.GetAttribute<MeasurementCategoryAttribute>());
-
-      sCommonMeasurements = new HashSet<Measurement>
-      {
-         Measurement.Cup,
-         Measurement.Gram,
-         Measurement.Ounce,
-         Measurement.Tablespoon,
-         Measurement.Teaspoon,
-         Measurement.FluidOunce,
-      };
     }
 
     private readonly IngredientReferenceViewModel mIngredient;
@@ -37,18 +26,19 @@ namespace RecipeBook
       mIngredient = ingredient;
       mMeasurements = new BindingList<ValueDisplayItem>();
 
+      Postfix = string.Format("of {0}", ingredient.Name);
+
       var amount = ingredient.Amount;
       var attr = sMeasurementAttributes[amount.Measurement];
       if (attr is OfCategoryAttribute)
       {
         Enabled = false;
-        Postfix = ingredient.Name;
         mSelectedItem = new AmountItem(amount);
+        mMeasurements.Add(mSelectedItem);
       }
       else
       {
         Enabled = true;
-        Postfix = string.Format("of {0}", ingredient.Name);
 
         var baseValue = amount.Value * attr.Factor;
 
@@ -56,11 +46,6 @@ namespace RecipeBook
         foreach (var kvp in sMeasurementAttributes)
         {
           var measurement = kvp.Key;
-          if (!sCommonMeasurements.Contains(measurement))
-          {
-            continue;
-          }
-          
           if (kvp.Value.GetType() == type)
           {
             var item = new MeasurementFractionItem(baseValue, measurement, sMeasurementAttributes[measurement]);

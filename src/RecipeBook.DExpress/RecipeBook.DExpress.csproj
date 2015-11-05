@@ -88,6 +88,7 @@
     </Compile>
     <Compile Include="Extensions\DevExpressExtensions.cs" />
     <Compile Include="Extensions\GridViewExtensions.cs" />
+    <Compile Include="Handlers\IViewModelStackHandler.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

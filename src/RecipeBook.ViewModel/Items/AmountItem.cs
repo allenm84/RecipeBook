@@ -17,7 +17,8 @@ namespace RecipeBook
       mDisplay = mAmount.GetDisplay();
     }
 
-    public override object Value { get { return mAmount; } }
+    public override object Value { get { return this; } }
     public override string Display { get { return mDisplay; } }
+    internal Amount Amount { get { return mAmount; } }
   }
 }
