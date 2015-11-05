@@ -43,7 +43,7 @@ namespace RecipeBook
 
     public static string GetDisplay(decimal count, Measurement measurement)
     {
-      return string.Format("{0} {1}",
+      return string.Format("{0:0.##} {1}",
         count,
         measurement.GetDisplay(count == 1));
     }

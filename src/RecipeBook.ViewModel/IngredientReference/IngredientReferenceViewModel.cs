@@ -44,7 +44,11 @@ namespace RecipeBook
     internal Amount Amount
     {
       get { return GetField<Amount>(); }
-      set { SetField(value); }
+      set 
+      { 
+        SetField(value);
+        RefreshDisplay();
+      }
     }
 
     internal string Name
