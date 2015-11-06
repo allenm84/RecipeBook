@@ -147,7 +147,11 @@ namespace RecipeBook
 
     protected override IngredientReferenceViewModel CreateNew()
     {
-      return new IngredientReferenceViewModel(mRecipe.Owner.IngredientList, null, new Amount());
+      return new IngredientReferenceViewModel(mRecipe.Owner.IngredientList, null, new Amount
+      {
+        Measurement = Measurement.Cup,
+        Value = 0,
+      });
     }
 
     protected override bool CanAccept()

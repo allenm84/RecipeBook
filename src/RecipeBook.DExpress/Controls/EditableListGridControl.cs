@@ -32,8 +32,12 @@ namespace RecipeBook
 
       btnAdd.Bind(listViewModel.AddCommand);
       btnEdit.Bind(listViewModel.EditCommand);
-      btnRemove.Bind(listViewModel.RemoveCommand);
-      btnClear.Bind(listViewModel.ClearCommand);
+
+      var remove = new MessageBoxConfirm(this, "Are you sure you want to remove the selected items?");
+      btnRemove.Bind(listViewModel.RemoveCommand, remove);
+
+      var clear = new MessageBoxConfirm(this, "Are you sure you want to remove all of the items?");
+      btnClear.Bind(listViewModel.ClearCommand, clear);
     }
 
     public GridView GridView

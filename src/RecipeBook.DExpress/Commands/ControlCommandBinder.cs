@@ -13,11 +13,13 @@ namespace RecipeBook
   {
     private Control control;
     private ICommand command;
+    private IConfirmCommand confirmCommand;
 
-    public ControlCommandBinder(Control control, ICommand command)
+    public ControlCommandBinder(Control control, ICommand command, IConfirmCommand confirmCommand)
     {
       this.control = control;
       this.command = command;
+      this.confirmCommand = confirmCommand;
 
       ReadCommandAsync();
 
@@ -76,6 +78,12 @@ namespace RecipeBook
 
     private void control_Click(object sender, EventArgs e)
     {
+      if (confirmCommand != null && !confirmCommand.Confirm())
+      {
+        // don't execute the command if it isn't confirmed
+        return;
+      }
+
       command.Execute(this);
     }
 

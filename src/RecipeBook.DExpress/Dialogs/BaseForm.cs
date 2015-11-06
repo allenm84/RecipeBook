@@ -11,7 +11,7 @@ using DevExpress.XtraEditors;
 
 namespace RecipeBook
 {
-  public partial class BaseForm : XtraForm
+  public partial class BaseForm : XtraForm, IConfirmCancel
   {
     protected bool mCancelClose = false;
 
@@ -38,5 +38,16 @@ namespace RecipeBook
       }
       return base.ProcessCmdKey(ref msg, keyData);
     }
+
+    bool IConfirmCommand.Confirm()
+    {
+      var result = MessageHelper.Confirm(this, "Are you sure you want to cancel?");
+      mCancelClose = !result;
+      return result;
+    }
+  }
+
+  public interface IConfirmCancel : IConfirmCommand
+  {
   }
 }

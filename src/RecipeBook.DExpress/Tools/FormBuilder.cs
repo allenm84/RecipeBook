@@ -19,7 +19,7 @@ namespace RecipeBook
       form.ClientSize = new Size(100, 80);
 
       var okCancel = new OKCancelButtons();
-      okCancel.Bind(viewModel);
+      okCancel.Bind(viewModel, form);
 
       form.AcceptButton = okCancel.OK;
       form.CancelButton = okCancel.Cancel;

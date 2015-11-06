@@ -38,7 +38,7 @@ namespace RecipeBook
       numNewRecipeAmount.BindValue(mModify, m => m.NewRecipeAmount);
       lblNewRecipePostfix.BindText(mModify, m => m.NewRecipePostFix);
 
-      okCancelButtons1.Bind(modify);
+      okCancelButtons1.Bind(modify, this);
       UpdateSelection();
     }
 

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace RecipeBook
 {
-  public interface IViewModelStackHandler
+  public interface IConfirmCommand
   {
-    BaseForm Handle(BaseAcceptableViewModel viewModel);
+    bool Confirm();
   }
 }

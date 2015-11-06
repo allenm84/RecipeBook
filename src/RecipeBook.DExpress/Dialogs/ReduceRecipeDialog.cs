@@ -27,7 +27,7 @@ namespace RecipeBook
       MinimumSize = Size;
       bsIngredients.DataSource = mViewModel.Items;
       gridViewItems.CustomRowCellEdit += gridViewItems_CustomRowCellEdit;
-      okCancelButtons1.Bind(viewModel);
+      okCancelButtons1.Bind(viewModel, this);
     }
 
     private void gridViewItems_CustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)
